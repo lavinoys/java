@@ -2,6 +2,8 @@ package me.lavinoys.javatest.java;
 
 import org.junit.jupiter.api.*;
 
+import java.util.function.Supplier;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -14,7 +16,12 @@ class StudyTest {
         Study study = new Study();
         assertNotNull(study);
         // 기대값, 동작, 에러 원인
-        assertEquals(StudyStatus.DRAFT, study.getStatus(), "스터디를 처음 만들면 상태값이 DRAFT여야 한다.");
+        assertEquals(StudyStatus.DRAFT, study.getStatus(), new Supplier<String>() {
+            @Override
+            public String get() {
+                return "스터디를 처음 만들면 DRAFT 상태다.";
+            }
+        });
     }
 
     @Test
