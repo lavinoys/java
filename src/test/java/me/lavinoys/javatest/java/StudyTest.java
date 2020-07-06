@@ -13,15 +13,12 @@ class StudyTest {
     @Test
     @DisplayName("스터디 만들기")
     void create_new_study() {
-        Study study = new Study();
-        assertNotNull(study);
-        // 기대값, 동작, 에러 원인
-        assertEquals(StudyStatus.DRAFT, study.getStatus(), new Supplier<String>() {
-            @Override
-            public String get() {
-                return "스터디를 처음 만들면 DRAFT 상태다.";
-            }
-        });
+        Study study = new Study(0);
+        assertAll(
+                () -> assertNotNull(study),
+                () -> assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면" + StudyStatus.DRAFT +" 상태다."),
+                () -> assertTrue(study.getLimit() > 0, "스터디 최대 참석 다능 인원은 0보다 커야 한다.")
+        );
     }
 
     @Test
