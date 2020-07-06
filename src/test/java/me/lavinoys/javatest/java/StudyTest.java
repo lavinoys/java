@@ -14,9 +14,9 @@ class StudyTest {
     @Test
     @DisplayName("스터디 만들기")
     void create_new_study() {
-        assertTimeout(Duration.ofMillis(100), () -> {
+        assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
             new Study(10);
-            Thread.sleep(1000);
+            Thread.sleep(300);
         });
     }
 
